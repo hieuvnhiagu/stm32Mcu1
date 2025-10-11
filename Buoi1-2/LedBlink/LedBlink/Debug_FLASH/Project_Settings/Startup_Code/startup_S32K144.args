@@ -1,0 +1,7 @@
+-c
+-I"F:/cac_mon_hoc/s32k144/Documentations/baitap/Buoi1-2/LedBlink/LedBlink/include"
+-x assembler-with-cpp
+-DSTART_FROM_FLASH
+-g3
+-mcpu=cortex-m4
+-specs=rdimon.specs
