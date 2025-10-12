@@ -36,22 +36,22 @@ void init_ports(void);
 
 void init_clock(void) {
     // Enable clock for PORTD in PCC (Peripheral Clock Control)
-    PCC->PCCn[PCC_PORTD_INDEX] |= PCC_PCCn_CGC_MASK;  // Enable PORTD clock
+	IP_PCC->PCCn[PCC_PORTD_INDEX] |= PCC_PCCn_CGC_MASK;  // Enable PORTD clock
 }
 
 void init_ports(void) {
     // Configure PTD0, PTD15, PTD16 as GPIO pins
-    PORTD->PCR[0]  = PORT_PCR_MUX(1);  // Set as GPIO
-    PORTD->PCR[15] = PORT_PCR_MUX(1);  // Set as GPIO
-    PORTD->PCR[16] = PORT_PCR_MUX(1);  // Set as GPIO
+    IP_PORTD->PCR[0]  = PORT_PCR_MUX(1);  // Set as GPIO
+    IP_PORTD->PCR[15] = PORT_PCR_MUX(1);  // Set as GPIO
+    IP_PORTD->PCR[16] = PORT_PCR_MUX(1);  // Set as GPIO
 
     // Set PTD0, PTD15, PTD16 as OUTPUT
-    PTD->PDDR |= (1 << 0);    // PTD0 output
-    PTD->PDDR |= (1 << 15);   // PTD15 output
-    PTD->PDDR |= (1 << 16);   // PTD16 output
+    IP_PTD->PDDR |= (1 << 0);    // PTD0 output
+    IP_PTD->PDDR |= (1 << 15);   // PTD15 output
+    IP_PTD->PDDR |= (1 << 16);   // PTD16 output
 
     // Turn OFF all LEDs initially (because LEDs are active-low)
-    PTD->PSOR |= (1 << 0) | (1 << 15) | (1 << 16);
+    IP_PTD->PSOR |= (1 << 0) | (1 << 15) | (1 << 16);
 }
 
 void delay_ms(volatile uint32_t ms) {
@@ -70,25 +70,26 @@ int main(void) {
 
     while(1) {
         // Turn ON Red LED (PTD0)
-        PTD->PCOR |= (1 << 0);     // Clear output
-        PTD->PSOR |= (1 << 15);    // Turn OFF Green LED
-        PTD->PSOR |= (1 << 16);    // Turn OFF Blue LED
+    	IP_PTD->PCOR |= (1 << 0);     // Clear output
+    	IP_PTD->PSOR |= (1 << 15);    // Turn OFF Green LED
+    	IP_PTD->PSOR |= (1 << 16);    // Turn OFF Blue LED
         delay_ms(3000);
 
         // Turn ON Green LED (PTD15)
-        PTD->PSOR |= (1 << 0);     // Turn OFF Red LED
-        PTD->PCOR |= (1 << 15);    // Turn ON Green LED
-        PTD->PSOR |= (1 << 16);    // Turn OFF Blue LED
+        IP_PTD->PSOR |= (1 << 0);     // Turn OFF Red LED
+        IP_PTD->PCOR |= (1 << 15);    // Turn ON Green LED
+        IP_PTD->PSOR |= (1 << 16);    // Turn OFF Blue LED
         delay_ms(3000);
 
         // Turn ON Blue LED (PTD16)
-        PTD->PSOR |= (1 << 0);     // Turn OFF Red LED
-        PTD->PSOR |= (1 << 15);    // Turn OFF Green LED
-        PTD->PCOR |= (1 << 16);    // Turn ON Blue LED
+        IP_PTD->PSOR |= (1 << 0);     // Turn OFF Red LED
+        IP_PTD->PSOR |= (1 << 15);    // Turn OFF Green LED
+        IP_PTD->PCOR |= (1 << 16);    // Turn ON Blue LED
         delay_ms(3000);
     }
     return 0;
 }
+
 
 
 
