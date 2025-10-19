@@ -1,0 +1,79 @@
+#include "gpio.h"
+
+// Function to configure GPIO pin (without interrupt setup in this example)
+void GPIO_Setup(ARM_GPIO_Pin_t pin, ARM_GPIO_SignalEvent_t cb_event) {
+    // GPIO setup could include configuring interrupt if necessary for the event
+    // For now, we're just setting it up for basic operations, no interrupt handling in this example.
+    // This can be extended for interrupt-based GPIO events.
+}
+
+// Function to set the direction (input/output) for a GPIO pin
+void GPIO_SetDirection(ARM_GPIO_Pin_t pin, ARM_GPIO_DIRECTION1 direction) {
+    GPIO_Type *gpio_base;
+
+    gpio_base = IP_PTA; // Replace with appropriate GPIO base
+
+    if (direction == ARM_GPIO_DIRECTION_OUTPUT1) {
+        gpio_base->PDDR |= (1 << pin);  // Set as output
+    } else {
+        gpio_base->PDDR &= ~(1 << pin); // Set as input
+    }
+}
+
+// Function to set the output mode (push-pull or open-drain) for a GPIO pin
+//void GPIO_SetOutputMode(ARM_GPIO_Pin_t pin, ARM_GPIO_OUTPUT_MODE mode) {
+//    PORT_Type *port_base;
+//
+//    // Chọn base address của PORT tương ứng
+//    port_base = IP_PORTA; // Thay thế với base address của PORT tương ứng (PORTA, PORTB, ...)
+//
+//    if (mode == ARM_GPIO_OUTPUT_PUSH_PULL) {
+//        port_base->PCR[pin] &= ~PORT_PCR_OD_MASK;  // Set push-pull mode
+//    } else {
+//        port_base->PCR[pin] |= PORT_PCR_OD_MASK;   // Set open-drain mode
+//    }
+//}
+
+
+// Function to configure pull-up or pull-down resistors for a GPIO pin
+void GPIO_SetPullResistor(ARM_GPIO_Pin_t pin, ARM_GPIO_PULL_RESISTOR1 resistor) {
+    PORT_Type *port_base;
+
+    port_base = IP_PORTA; // Replace with appropriate PORT base
+
+    if (resistor == ARM_GPIO_PULL_UP1) {
+        port_base->PCR[pin] |= PORT_PCR_PE_MASK | PORT_PCR_PS_MASK; // Enable pull-up resistor
+    } else if (resistor == ARM_GPIO_PULL_DOWN1) {
+        port_base->PCR[pin] |= PORT_PCR_PE_MASK; // Enable pull-down resistor
+        port_base->PCR[pin] &= ~PORT_PCR_PS_MASK; // Select pull-down
+    } else {
+        port_base->PCR[pin] &= ~PORT_PCR_PE_MASK; // Disable pull resistors
+    }
+}
+
+// Function to configure trigger events for GPIO (interrupt-based events can be added)
+void GPIO_SetEventTrigger(ARM_GPIO_Pin_t pin, ARM_GPIO_EVENT_TRIGGER trigger) {
+    // Assuming interrupt handling is configured
+    // The trigger event setup depends on the interrupt configuration of the system
+    // For example, enabling edge interrupts for the selected pin.
+}
+
+// Function to set the output value for a GPIO pin
+void GPIO_SetOutput(ARM_GPIO_Pin_t pin, uint32_t val) {
+    GPIO_Type *gpio_base;
+
+    gpio_base = IP_PTA; // Replace with appropriate GPIO base
+    if (val) {
+        gpio_base->PSOR = (1 << pin);  // Set pin high
+    } else {
+        gpio_base->PCOR = (1 << pin);  // Set pin low
+    }
+}
+
+// Function to get the input value of a GPIO pin
+uint32_t GPIO_GetInput(ARM_GPIO_Pin_t pin) {
+    GPIO_Type *gpio_base;
+
+    gpio_base = IP_PTA; // Replace with appropriate GPIO base
+    return (gpio_base->PDIR >> pin) & 1U; // Read input pin value
+}

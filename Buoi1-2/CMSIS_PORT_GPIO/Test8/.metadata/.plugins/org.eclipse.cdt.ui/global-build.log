@@ -1,0 +1,376 @@
+11:27:32 **** Build of configuration Debug_FLASH for project TestCode ****
+make -j16 all 
+Building file: ../src/main.c
+Building file: ../driver/gpio.c
+Building file: ../driver/port.c
+Invoking: Standard S32DS C Compiler
+Building file: ../Project_Settings/Startup_Code/startup.c
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+Building file: ../Project_Settings/Startup_Code/startup_S32K144.S
+Invoking: Standard S32DS C Compiler
+Invoking: Standard S32DS C Compiler
+Invoking: Standard S32DS C Compiler
+Building file: ../Project_Settings/Startup_Code/system_S32K144.c
+arm-none-eabi-gcc "@driver/gpio.args" -MMD -MP -MF"driver/gpio.d" -MT"driver/gpio.o" -o "driver/gpio.o" "../driver/gpio.c"
+Invoking: Standard S32DS Assembler
+arm-none-eabi-gcc "@driver/gpio.args" -MMD -MP -MF"driver/port.d" -MT"driver/port.o" -o "driver/port.o" "../driver/port.c"
+arm-none-eabi-gcc "@Project_Settings/Startup_Code/startup_S32K144.args" -o "Project_Settings/Startup_Code/startup_S32K144.o" "../Project_Settings/Startup_Code/startup_S32K144.S"
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@Project_Settings/Startup_Code/startup.args" -MMD -MP -MF"Project_Settings/Startup_Code/startup.d" -MT"Project_Settings/Startup_Code/startup.o" -o "Project_Settings/Startup_Code/startup.o" "../Project_Settings/Startup_Code/startup.c"
+arm-none-eabi-gcc "@Project_Settings/Startup_Code/startup.args" -MMD -MP -MF"Project_Settings/Startup_Code/system_S32K144.d" -MT"Project_Settings/Startup_Code/system_S32K144.o" -o "Project_Settings/Startup_Code/system_S32K144.o" "../Project_Settings/Startup_Code/system_S32K144.c"
+../driver/port.c: In function 'PORT_SetDirection':
+../driver/port.c:23:16: warning: variable 'port_base' set but not used [-Wunused-but-set-variable]
+   23 |     PORT_Type *port_base;
+      |                ^~~~~~~~~
+Finished building: ../Project_Settings/Startup_Code/startup_S32K144.S
+ 
+Finished building: ../src/main.c
+ 
+Finished building: ../driver/gpio.c
+ 
+Finished building: ../Project_Settings/Startup_Code/system_S32K144.c
+Finished building: ../driver/port.c
+Finished building: ../Project_Settings/Startup_Code/startup.c
+ 
+ 
+ 
+Building target: TestCode.elf
+Invoking: Standard S32DS C Linker
+arm-none-eabi-gcc -o "TestCode.elf" "@TestCode.args"   
+Finished building target: TestCode.elf
+ 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley TestCode.elf
+   text	   data	    bss	    dec	    hex	filename
+   6228	   2400	   3328	  11956	   2eb4	TestCode.elf
+Finished building: TestCode.siz
+ 
+11:34:22 **** Incremental Build of configuration Debug_FLASH for project TestCode ****
+make -j16 all 
+Building file: ../src/main.c
+Building file: ../driver/gpio.c
+Invoking: Standard S32DS C Compiler
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+arm-none-eabi-gcc "@driver/gpio.args" -MMD -MP -MF"driver/gpio.d" -MT"driver/gpio.o" -o "driver/gpio.o" "../driver/gpio.c"
+../src/main.c: In function 'main':
+../src/main.c:43:59: error: too few arguments to function 'GPIO_GetInput'
+   43 |             GPIO_SetOutput(ARM_PORT_ID_A,ARM_GPIO_PIN_0, !GPIO_GetInput(ARM_GPIO_PIN_0));  // Toggle Red LED
+      |                                                           ^~~~~~~~~~~~~
+In file included from ../src/main.c:3:
+F:/cac_mon_hoc/s32k144/Documentations/codeTest/1.1/Test8/TestCode/driver/gpio.h:62:10: note: declared here
+   62 | uint32_t GPIO_GetInput(ARM_PORT_ID port, ARM_GPIO_Pin_t pin);
+      |          ^~~~~~~~~~~~~
+../src/main.c:48:34: warning: implicit declaration of function 'GGPIO_GetInput'; did you mean 'GPIO_GetInput'? [-Wimplicit-function-declaration]
+   48 |         uint32_t button2_state = GGPIO_GetInput(ARM_PORT_ID_B, ARM_GPIO_PIN_5);
+      |                                  ^~~~~~~~~~~~~~
+      |                                  GPIO_GetInput
+../src/main.c:52:59: error: too few arguments to function 'GPIO_GetInput'
+   52 |             GPIO_SetOutput(ARM_PORT_ID_B,ARM_GPIO_PIN_1, !GPIO_GetInput(ARM_GPIO_PIN_1));  // Toggle Green LED
+      |                                                           ^~~~~~~~~~~~~
+In file included from ../src/main.c:3:
+F:/cac_mon_hoc/s32k144/Documentations/codeTest/1.1/Test8/TestCode/driver/gpio.h:62:10: note: declared here
+   62 | uint32_t GPIO_GetInput(ARM_PORT_ID port, ARM_GPIO_Pin_t pin);
+      |          ^~~~~~~~~~~~~
+make: *** [src/subdir.mk:20: src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+In file included from ../driver/gpio.c:1:
+../driver/gpio.h:57:24: error: unknown type name 'ARM_PORT_ID'
+   57 | void GPIO_SetDirection(ARM_PORT_ID port, ARM_GPIO_Pin_t pin, ARM_GPIO_DIRECTION direction);
+      |                        ^~~~~~~~~~~
+../driver/gpio.h:57:62: error: unknown type name 'ARM_GPIO_DIRECTION'; did you mean 'ARM_GPIO_DIRECTION1'?
+   57 | void GPIO_SetDirection(ARM_PORT_ID port, ARM_GPIO_Pin_t pin, ARM_GPIO_DIRECTION direction);
+      |                                                              ^~~~~~~~~~~~~~~~~~
+      |                                                              ARM_GPIO_DIRECTION1
+../driver/gpio.h:59:27: error: unknown type name 'ARM_PORT_ID'
+   59 | void GPIO_SetPullResistor(ARM_PORT_ID port, ARM_GPIO_Pin_t pin, ARM_GPIO_PULL_RESISTOR resistor);
+      |                           ^~~~~~~~~~~
+../driver/gpio.h:59:65: error: unknown type name 'ARM_GPIO_PULL_RESISTOR'; did you mean 'ARM_GPIO_PULL_RESISTOR1'?
+   59 | void GPIO_SetPullResistor(ARM_PORT_ID port, ARM_GPIO_Pin_t pin, ARM_GPIO_PULL_RESISTOR resistor);
+      |                                                                 ^~~~~~~~~~~~~~~~~~~~~~
+      |                                                                 ARM_GPIO_PULL_RESISTOR1
+../driver/gpio.h:61:21: error: unknown type name 'ARM_PORT_ID'
+   61 | void GPIO_SetOutput(ARM_PORT_ID port, ARM_GPIO_Pin_t pin, uint32_t val);
+      |                     ^~~~~~~~~~~
+../driver/gpio.h:62:24: error: unknown type name 'ARM_PORT_ID'
+   62 | uint32_t GPIO_GetInput(ARM_PORT_ID port, ARM_GPIO_Pin_t pin);
+      |                        ^~~~~~~~~~~
+../driver/gpio.c:11:24: error: unknown type name 'ARM_PORT_ID'
+   11 | void GPIO_SetDirection(ARM_PORT_ID port, ARM_GPIO_Pin_t pin, ARM_GPIO_DIRECTION direction) {
+      |                        ^~~~~~~~~~~
+../driver/gpio.c:11:62: error: unknown type name 'ARM_GPIO_DIRECTION'; did you mean 'ARM_GPIO_DIRECTION1'?
+   11 | void GPIO_SetDirection(ARM_PORT_ID port, ARM_GPIO_Pin_t pin, ARM_GPIO_DIRECTION direction) {
+      |                                                              ^~~~~~~~~~~~~~~~~~
+      |                                                              ARM_GPIO_DIRECTION1
+../driver/gpio.c:60:27: error: unknown type name 'ARM_PORT_ID'
+   60 | void GPIO_SetPullResistor(ARM_PORT_ID port, ARM_GPIO_Pin_t pin, ARM_GPIO_PULL_RESISTOR resistor) {
+      |                           ^~~~~~~~~~~
+../driver/gpio.c:60:65: error: unknown type name 'ARM_GPIO_PULL_RESISTOR'; did you mean 'ARM_GPIO_PULL_RESISTOR1'?
+   60 | void GPIO_SetPullResistor(ARM_PORT_ID port, ARM_GPIO_Pin_t pin, ARM_GPIO_PULL_RESISTOR resistor) {
+      |                                                                 ^~~~~~~~~~~~~~~~~~~~~~
+      |                                                                 ARM_GPIO_PULL_RESISTOR1
+../driver/gpio.c:103:21: error: unknown type name 'ARM_PORT_ID'
+  103 | void GPIO_SetOutput(ARM_PORT_ID port, ARM_GPIO_Pin_t pin, uint32_t val) {
+      |                     ^~~~~~~~~~~
+../driver/gpio.c:137:24: error: unknown type name 'ARM_PORT_ID'
+  137 | uint32_t GPIO_GetInput(ARM_PORT_ID port, ARM_GPIO_Pin_t pin) {
+      |                        ^~~~~~~~~~~
+make: *** [driver/subdir.mk:23: driver/gpio.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+11:35:08 **** Incremental Build of configuration Debug_FLASH for project TestCode ****
+make -j16 all 
+Building file: ../src/main.c
+Building file: ../driver/gpio.c
+Invoking: Standard S32DS C Compiler
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@driver/gpio.args" -MMD -MP -MF"driver/gpio.d" -MT"driver/gpio.o" -o "driver/gpio.o" "../driver/gpio.c"
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../driver/gpio.c: In function 'GPIO_SetDirection':
+../driver/gpio.c:17:25: error: 'GPIOA' undeclared (first use in this function); did you mean 'GPIO_H'?
+   17 |             gpio_base = GPIOA;  // GPIO base cho PORTA
+      |                         ^~~~~
+      |                         GPIO_H
+../driver/gpio.c:17:25: note: each undeclared identifier is reported only once for each function it appears in
+../driver/gpio.c:20:25: error: 'GPIOB' undeclared (first use in this function); did you mean 'GPIO_H'?
+   20 |             gpio_base = GPIOB;  // GPIO base cho PORTB
+      |                         ^~~~~
+      |                         GPIO_H
+../driver/gpio.c:23:25: error: 'GPIOC' undeclared (first use in this function); did you mean 'GPIO_H'?
+   23 |             gpio_base = GPIOC;  // GPIO base cho PORTC
+      |                         ^~~~~
+      |                         GPIO_H
+../driver/gpio.c:26:25: error: 'GPIOD' undeclared (first use in this function); did you mean 'GPIO_H'?
+   26 |             gpio_base = GPIOD;  // GPIO base cho PORTD
+      |                         ^~~~~
+      |                         GPIO_H
+../src/main.c: In function 'main':
+../driver/gpio.c:29:25: error: 'GPIOE' undeclared (first use in this function); did you mean 'GPIO_H'?
+   29 |             gpio_base = GPIOE;  // GPIO base cho PORTE
+      |                         ^~~~~
+      |                         GPIO_H
+../src/main.c:43:59: error: too few arguments to function 'GPIO_GetInput'
+   43 |             GPIO_SetOutput(ARM_PORT_ID_A,ARM_GPIO_PIN_0, !GPIO_GetInput(ARM_GPIO_PIN_0));  // Toggle Red LED
+      |                                                           ^~~~~~~~~~~~~
+In file included from ../src/main.c:3:
+F:/cac_mon_hoc/s32k144/Documentations/codeTest/1.1/Test8/TestCode/driver/gpio.h:62:10: note: declared here
+   62 | uint32_t GPIO_GetInput(ARM_PORT_ID port, ARM_GPIO_Pin_t pin);
+      |          ^~~~~~~~~~~~~
+../driver/gpio.c: In function 'GPIO_SetPullResistor':
+../driver/gpio.c:66:25: error: 'PORTA' undeclared (first use in this function); did you mean 'PORT_H'?
+   66 |             port_base = PORTA;  // PORTA base
+      |                         ^~~~~
+      |                         PORT_H
+../src/main.c:48:34: warning: implicit declaration of function 'GGPIO_GetInput'; did you mean 'GPIO_GetInput'? [-Wimplicit-function-declaration]
+   48 |         uint32_t button2_state = GGPIO_GetInput(ARM_PORT_ID_B, ARM_GPIO_PIN_5);
+      |                                  ^~~~~~~~~~~~~~
+      |                                  GPIO_GetInput
+../src/main.c:52:59: error: too few arguments to function 'GPIO_GetInput'
+   52 |             GPIO_SetOutput(ARM_PORT_ID_B,ARM_GPIO_PIN_1, !GPIO_GetInput(ARM_GPIO_PIN_1));  // Toggle Green LED
+      |                                                           ^~~~~~~~~~~~~
+In file included from ../src/main.c:3:
+F:/cac_mon_hoc/s32k144/Documentations/codeTest/1.1/Test8/TestCode/driver/gpio.h:62:10: note: declared here
+   62 | uint32_t GPIO_GetInput(ARM_PORT_ID port, ARM_GPIO_Pin_t pin);
+      |          ^~~~~~~~~~~~~
+../driver/gpio.c:69:25: error: 'PORTB' undeclared (first use in this function); did you mean 'PORT_H'?
+   69 |             port_base = PORTB;  // PORTB base
+      |                         ^~~~~
+      |                         PORT_H
+../driver/gpio.c:72:25: error: 'PORTC' undeclared (first use in this function); did you mean 'IP_RTC'?
+   72 |             port_base = PORTC;  // PORTC base
+      |                         ^~~~~
+      |                         IP_RTC
+../driver/gpio.c:75:25: error: 'PORTD' undeclared (first use in this function); did you mean 'PORT_H'?
+   75 |             port_base = PORTD;  // PORTD base
+      |                         ^~~~~
+      |                         PORT_H
+../driver/gpio.c:78:25: error: 'PORTE' undeclared (first use in this function); did you mean 'PORT_H'?
+   78 |             port_base = PORTE;  // PORTE base
+      |                         ^~~~~
+      |                         PORT_H
+../driver/gpio.c: In function 'GPIO_SetOutput':
+../driver/gpio.c:109:25: error: 'GPIOA' undeclared (first use in this function); did you mean 'GPIO_H'?
+  109 |             gpio_base = GPIOA;  // GPIO base cho PORTA
+      |                         ^~~~~
+      |                         GPIO_H
+../driver/gpio.c:112:25: error: 'GPIOB' undeclared (first use in this function); did you mean 'GPIO_H'?
+  112 |             gpio_base = GPIOB;  // GPIO base cho PORTB
+      |                         ^~~~~
+      |                         GPIO_H
+../driver/gpio.c:115:25: error: 'GPIOC' undeclared (first use in this function); did you mean 'GPIO_H'?
+  115 |             gpio_base = GPIOC;  // GPIO base cho PORTC
+      |                         ^~~~~
+      |                         GPIO_H
+../driver/gpio.c:118:25: error: 'GPIOD' undeclared (first use in this function); did you mean 'GPIO_H'?
+  118 |             gpio_base = GPIOD;  // GPIO base cho PORTD
+      |                         ^~~~~
+      |                         GPIO_H
+../driver/gpio.c:121:25: error: 'GPIOE' undeclared (first use in this function); did you mean 'GPIO_H'?
+  121 |             gpio_base = GPIOE;  // GPIO base cho PORTE
+      |                         ^~~~~
+      |                         GPIO_H
+../driver/gpio.c: In function 'GPIO_GetInput':
+../driver/gpio.c:143:25: error: 'GPIOA' undeclared (first use in this function); did you mean 'GPIO_H'?
+  143 |             gpio_base = GPIOA;  // GPIO base cho PORTA
+      |                         ^~~~~
+      |                         GPIO_H
+../driver/gpio.c:146:25: error: 'GPIOB' undeclared (first use in this function); did you mean 'GPIO_H'?
+  146 |             gpio_base = GPIOB;  // GPIO base cho PORTB
+      |                         ^~~~~
+      |                         GPIO_H
+../driver/gpio.c:149:25: error: 'GPIOC' undeclared (first use in this function); did you mean 'GPIO_H'?
+  149 |             gpio_base = GPIOC;  // GPIO base cho PORTC
+      |                         ^~~~~
+      |                         GPIO_H
+../driver/gpio.c:152:25: error: 'GPIOD' undeclared (first use in this function); did you mean 'GPIO_H'?
+  152 |             gpio_base = GPIOD;  // GPIO base cho PORTD
+      |                         ^~~~~
+      |                         GPIO_H
+../driver/gpio.c:155:25: error: 'GPIOE' undeclared (first use in this function); did you mean 'GPIO_H'?
+  155 |             gpio_base = GPIOE;  // GPIO base cho PORTE
+      |                         ^~~~~
+      |                         GPIO_H
+make: *** [src/subdir.mk:20: src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [driver/subdir.mk:23: driver/gpio.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+11:37:26 **** Incremental Build of configuration Debug_FLASH for project TestCode ****
+make -j16 all 
+Building file: ../src/main.c
+Building file: ../driver/gpio.c
+Invoking: Standard S32DS C Compiler
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+arm-none-eabi-gcc "@driver/gpio.args" -MMD -MP -MF"driver/gpio.d" -MT"driver/gpio.o" -o "driver/gpio.o" "../driver/gpio.c"
+../src/main.c: In function 'main':
+../src/main.c:43:59: error: too few arguments to function 'GPIO_GetInput'
+   43 |             GPIO_SetOutput(ARM_PORT_ID_A,ARM_GPIO_PIN_0, !GPIO_GetInput(ARM_GPIO_PIN_0));  // Toggle Red LED
+      |                                                           ^~~~~~~~~~~~~
+In file included from ../src/main.c:3:
+F:/cac_mon_hoc/s32k144/Documentations/codeTest/1.1/Test8/TestCode/driver/gpio.h:62:10: note: declared here
+   62 | uint32_t GPIO_GetInput(ARM_PORT_ID port, ARM_GPIO_Pin_t pin);
+      |          ^~~~~~~~~~~~~
+../src/main.c:48:34: warning: implicit declaration of function 'GGPIO_GetInput'; did you mean 'GPIO_GetInput'? [-Wimplicit-function-declaration]
+   48 |         uint32_t button2_state = GGPIO_GetInput(ARM_PORT_ID_B, ARM_GPIO_PIN_5);
+      |                                  ^~~~~~~~~~~~~~
+      |                                  GPIO_GetInput
+../driver/gpio.c: In function 'GPIO_SetDirection':
+../src/main.c:52:59: error: too few arguments to function 'GPIO_GetInput'
+   52 |             GPIO_SetOutput(ARM_PORT_ID_B,ARM_GPIO_PIN_1, !GPIO_GetInput(ARM_GPIO_PIN_1));  // Toggle Green LED
+      |                                                           ^~~~~~~~~~~~~
+In file included from ../src/main.c:3:
+F:/cac_mon_hoc/s32k144/Documentations/codeTest/1.1/Test8/TestCode/driver/gpio.h:62:10: note: declared here
+   62 | uint32_t GPIO_GetInput(ARM_PORT_ID port, ARM_GPIO_Pin_t pin);
+      |          ^~~~~~~~~~~~~
+../driver/gpio.c:17:25: error: 'GPIOA' undeclared (first use in this function); did you mean 'GPIO_H'?
+   17 |             gpio_base = GPIOA;  // GPIO base cho PORTA
+      |                         ^~~~~
+      |                         GPIO_H
+../driver/gpio.c:17:25: note: each undeclared identifier is reported only once for each function it appears in
+../driver/gpio.c:20:25: error: 'GPIOB' undeclared (first use in this function); did you mean 'GPIO_H'?
+   20 |             gpio_base = GPIOB;  // GPIO base cho PORTB
+      |                         ^~~~~
+      |                         GPIO_H
+../driver/gpio.c:23:25: error: 'GPIOC' undeclared (first use in this function); did you mean 'GPIO_H'?
+   23 |             gpio_base = GPIOC;  // GPIO base cho PORTC
+      |                         ^~~~~
+      |                         GPIO_H
+../driver/gpio.c:26:25: error: 'GPIOD' undeclared (first use in this function); did you mean 'GPIO_H'?
+   26 |             gpio_base = GPIOD;  // GPIO base cho PORTD
+      |                         ^~~~~
+      |                         GPIO_H
+../driver/gpio.c:29:25: error: 'GPIOE' undeclared (first use in this function); did you mean 'GPIO_H'?
+   29 |             gpio_base = GPIOE;  // GPIO base cho PORTE
+      |                         ^~~~~
+      |                         GPIO_H
+make: *** [src/subdir.mk:20: src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [driver/subdir.mk:23: driver/gpio.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+11:37:51 **** Incremental Build of configuration Debug_FLASH for project TestCode ****
+make -j16 all 
+Building file: ../src/main.c
+Building file: ../driver/gpio.c
+Invoking: Standard S32DS C Compiler
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+arm-none-eabi-gcc "@driver/gpio.args" -MMD -MP -MF"driver/gpio.d" -MT"driver/gpio.o" -o "driver/gpio.o" "../driver/gpio.c"
+../src/main.c: In function 'main':
+../src/main.c:43:59: error: too few arguments to function 'GPIO_GetInput'
+   43 |             GPIO_SetOutput(ARM_PORT_ID_A,ARM_GPIO_PIN_0, !GPIO_GetInput(ARM_GPIO_PIN_0));  // Toggle Red LED
+      |                                                           ^~~~~~~~~~~~~
+In file included from ../src/main.c:3:
+F:/cac_mon_hoc/s32k144/Documentations/codeTest/1.1/Test8/TestCode/driver/gpio.h:62:10: note: declared here
+   62 | uint32_t GPIO_GetInput(ARM_PORT_ID port, ARM_GPIO_Pin_t pin);
+      |          ^~~~~~~~~~~~~
+../src/main.c:48:34: warning: implicit declaration of function 'GGPIO_GetInput'; did you mean 'GPIO_GetInput'? [-Wimplicit-function-declaration]
+   48 |         uint32_t button2_state = GGPIO_GetInput(ARM_PORT_ID_B, ARM_GPIO_PIN_5);
+      |                                  ^~~~~~~~~~~~~~
+      |                                  GPIO_GetInput
+../src/main.c:52:59: error: too few arguments to function 'GPIO_GetInput'
+   52 |             GPIO_SetOutput(ARM_PORT_ID_B,ARM_GPIO_PIN_1, !GPIO_GetInput(ARM_GPIO_PIN_1));  // Toggle Green LED
+      |                                                           ^~~~~~~~~~~~~
+In file included from ../src/main.c:3:
+F:/cac_mon_hoc/s32k144/Documentations/codeTest/1.1/Test8/TestCode/driver/gpio.h:62:10: note: declared here
+   62 | uint32_t GPIO_GetInput(ARM_PORT_ID port, ARM_GPIO_Pin_t pin);
+      |          ^~~~~~~~~~~~~
+make: *** [src/subdir.mk:20: src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+Finished building: ../driver/gpio.c
+ 
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+11:39:35 **** Incremental Build of configuration Debug_FLASH for project TestCode ****
+make -j16 all 
+Building file: ../src/main.c
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'main':
+../src/main.c:48:34: warning: implicit declaration of function 'GGPIO_GetInput'; did you mean 'GPIO_GetInput'? [-Wimplicit-function-declaration]
+   48 |         uint32_t button2_state = GGPIO_GetInput(ARM_PORT_ID_B, ARM_GPIO_PIN_5);
+      |                                  ^~~~~~~~~~~~~~
+      |                                  GPIO_GetInput
+Finished building: ../src/main.c
+ 
+Building target: TestCode.elf
+Invoking: Standard S32DS C Linker
+arm-none-eabi-gcc -o "TestCode.elf" "@TestCode.args"   
+f:/download/s32ds/s32ds/build_tools/gcc_v11.4/gcc-11.4-arm32-eabi/bin/../lib/gcc/arm-none-eabi/11.4.0/../../../../arm-none-eabi/bin/real-ld.exe: ./src/main.o: in function `main':
+F:\cac_mon_hoc\s32k144\Documentations\codeTest\1.1\Test8\TestCode\Debug_FLASH/../src/main.c:48: undefined reference to `GGPIO_GetInput'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:37: TestCode.elf] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+11:41:02 **** Incremental Build of configuration Debug_FLASH for project TestCode ****
+make -j16 all 
+Building file: ../src/main.c
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+Finished building: ../src/main.c
+ 
+Building target: TestCode.elf
+Invoking: Standard S32DS C Linker
+arm-none-eabi-gcc -o "TestCode.elf" "@TestCode.args"   
+Finished building target: TestCode.elf
+ 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley TestCode.elf
+   text	   data	    bss	    dec	    hex	filename
+   6404	   2400	   3328	  12132	   2f64	TestCode.elf
+Finished building: TestCode.siz
+ 
+11:49:19 **** Incremental Build of configuration Debug_FLASH for project TestCode ****
+make -j16 all 
+Building file: ../src/main.c
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+Finished building: ../src/main.c
+ 
+Building target: TestCode.elf
+Invoking: Standard S32DS C Linker
+arm-none-eabi-gcc -o "TestCode.elf" "@TestCode.args"   
+Finished building target: TestCode.elf
+ 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley TestCode.elf
+   text	   data	    bss	    dec	    hex	filename
+   6404	   2400	   3328	  12132	   2f64	TestCode.elf
+Finished building: TestCode.siz
+ 

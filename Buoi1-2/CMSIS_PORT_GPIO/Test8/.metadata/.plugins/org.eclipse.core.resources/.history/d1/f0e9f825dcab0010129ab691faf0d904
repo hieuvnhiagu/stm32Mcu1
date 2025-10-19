@@ -1,0 +1,164 @@
+#include "gpio.h"
+
+// Function to configure GPIO pin (without interrupt setup in this example)
+void GPIO_Setup(ARM_GPIO_Pin_t pin, ARM_GPIO_SignalEvent_t cb_event) {
+    // GPIO setup could include configuring interrupt if necessary for the event
+    // For now, we're just setting it up for basic operations, no interrupt handling in this example.
+    // This can be extended for interrupt-based GPIO events.
+}
+
+// Function to set the direction (input/output) for a GPIO pin
+void GPIO_SetDirection(ARM_PORT_ID port, ARM_GPIO_Pin_t pin, ARM_GPIO_DIRECTION direction) {
+    GPIO_Type *gpio_base;
+
+    // Chọn GPIO base tương ứng với cổng
+    switch (port) {
+        case ARM_PORT_ID_A:
+            gpio_base = GPIOA;  // GPIO base cho PORTA
+            break;
+        case ARM_PORT_ID_B:
+            gpio_base = GPIOB;  // GPIO base cho PORTB
+            break;
+        case ARM_PORT_ID_C:
+            gpio_base = GPIOC;  // GPIO base cho PORTC
+            break;
+        case ARM_PORT_ID_D:
+            gpio_base = GPIOD;  // GPIO base cho PORTD
+            break;
+        case ARM_PORT_ID_E:
+            gpio_base = GPIOE;  // GPIO base cho PORTE
+            break;
+        default:
+            return;  // Nếu cổng không hợp lệ, trả về
+    }
+
+    // Cấu hình chiều hướng của chân (input/output)
+    if (direction == ARM_GPIO_DIRECTION_OUTPUT) {
+        gpio_base->PDDR |= (1 << pin);  // Set pin as output
+    } else {
+        gpio_base->PDDR &= ~(1 << pin); // Set pin as input
+    }
+}
+
+// Function to set the output mode (push-pull or open-drain) for a GPIO pin
+//void GPIO_SetOutputMode(ARM_GPIO_Pin_t pin, ARM_GPIO_OUTPUT_MODE mode) {
+//    PORT_Type *port_base;
+//
+//    // Chọn base address của PORT tương ứng
+//    port_base = IP_PORTA; // Thay thế với base address của PORT tương ứng (PORTA, PORTB, ...)
+//
+//    if (mode == ARM_GPIO_OUTPUT_PUSH_PULL) {
+//        port_base->PCR[pin] &= ~PORT_PCR_OD_MASK;  // Set push-pull mode
+//    } else {
+//        port_base->PCR[pin] |= PORT_PCR_OD_MASK;   // Set open-drain mode
+//    }
+//}
+
+
+// Function to configure pull-up or pull-down resistors for a GPIO pin
+// Function to set pull-up or pull-down resistors for a GPIO pin
+void GPIO_SetPullResistor(ARM_PORT_ID port, ARM_GPIO_Pin_t pin, ARM_GPIO_PULL_RESISTOR resistor) {
+    PORT_Type *port_base;
+
+    // Chọn base address của PORT tương ứng
+    switch (port) {
+        case ARM_PORT_ID_A:
+            port_base = PORTA;  // PORTA base
+            break;
+        case ARM_PORT_ID_B:
+            port_base = PORTB;  // PORTB base
+            break;
+        case ARM_PORT_ID_C:
+            port_base = PORTC;  // PORTC base
+            break;
+        case ARM_PORT_ID_D:
+            port_base = PORTD;  // PORTD base
+            break;
+        case ARM_PORT_ID_E:
+            port_base = PORTE;  // PORTE base
+            break;
+        default:
+            return;  // Nếu cổng không hợp lệ, trả về
+    }
+
+    // Cấu hình pull-up/pull-down resistor cho chân
+    if (resistor == ARM_GPIO_PULL_UP) {
+        port_base->PCR[pin] |= PORT_PCR_PE_MASK | PORT_PCR_PS_MASK; // Enable pull-up resistor
+    } else if (resistor == ARM_GPIO_PULL_DOWN) {
+        port_base->PCR[pin] |= PORT_PCR_PE_MASK; // Enable pull-down resistor
+        port_base->PCR[pin] &= ~PORT_PCR_PS_MASK; // Select pull-down
+    } else {
+        port_base->PCR[pin] &= ~PORT_PCR_PE_MASK; // Disable pull resistors
+    }
+}
+
+// Function to configure trigger events for GPIO (interrupt-based events can be added)
+void GPIO_SetEventTrigger(ARM_GPIO_Pin_t pin, ARM_GPIO_EVENT_TRIGGER trigger) {
+    // Assuming interrupt handling is configured
+    // The trigger event setup depends on the interrupt configuration of the system
+    // For example, enabling edge interrupts for the selected pin.
+}
+
+// Function to set the output value for a GPIO pin
+void GPIO_SetOutput(ARM_PORT_ID port, ARM_GPIO_Pin_t pin, uint32_t val) {
+    GPIO_Type *gpio_base;
+
+    // Chọn GPIO base dựa trên cổng
+    switch (port) {
+        case ARM_PORT_ID_A:
+            gpio_base = GPIOA;  // GPIO base cho PORTA
+            break;
+        case ARM_PORT_ID_B:
+            gpio_base = GPIOB;  // GPIO base cho PORTB
+            break;
+        case ARM_PORT_ID_C:
+            gpio_base = GPIOC;  // GPIO base cho PORTC
+            break;
+        case ARM_PORT_ID_D:
+            gpio_base = GPIOD;  // GPIO base cho PORTD
+            break;
+        case ARM_PORT_ID_E:
+            gpio_base = GPIOE;  // GPIO base cho PORTE
+            break;
+        default:
+            return;  // Trả về nếu cổng không hợp lệ
+    }
+
+    // Nếu giá trị là 1, set pin lên cao (high)
+    if (val) {
+        gpio_base->PSOR = (1 << pin);  // Set pin high
+    } else {
+        gpio_base->PCOR = (1 << pin);  // Set pin low
+    }
+}
+
+
+// Function to read the input value of a GPIO pin
+uint32_t GPIO_GetInput(ARM_PORT_ID port, ARM_GPIO_Pin_t pin) {
+    GPIO_Type *gpio_base;
+
+    // Chọn GPIO base dựa trên cổng
+    switch (port) {
+        case ARM_PORT_ID_A:
+            gpio_base = GPIOA;  // GPIO base cho PORTA
+            break;
+        case ARM_PORT_ID_B:
+            gpio_base = GPIOB;  // GPIO base cho PORTB
+            break;
+        case ARM_PORT_ID_C:
+            gpio_base = GPIOC;  // GPIO base cho PORTC
+            break;
+        case ARM_PORT_ID_D:
+            gpio_base = GPIOD;  // GPIO base cho PORTD
+            break;
+        case ARM_PORT_ID_E:
+            gpio_base = GPIOE;  // GPIO base cho PORTE
+            break;
+        default:
+            return 0;  // Nếu cổng không hợp lệ, trả về 0
+    }
+
+    // Đọc giá trị của chân GPIO (0 hoặc 1)
+    return (gpio_base->PDIR >> pin) & 1U;  // Đọc giá trị pin input (0 hoặc 1)
+}
+

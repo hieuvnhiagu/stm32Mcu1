@@ -1,0 +1,64 @@
+#ifndef GPIO_H
+#define GPIO_H
+
+#include "S32K144.h"
+#include "port.h"
+// Enum for GPIO Pin Numbers
+typedef enum {
+    ARM_GPIO_PIN_0 = 0,
+    ARM_GPIO_PIN_1,
+	ARM_GPIO_PIN_2,
+	ARM_GPIO_PIN_3,
+	ARM_GPIO_PIN_4,
+	ARM_GPIO_PIN_5,
+	ARM_GPIO_PIN_6,
+	ARM_GPIO_PIN_7,
+	ARM_GPIO_PIN_8,
+	ARM_GPIO_PIN_9,
+	ARM_GPIO_PIN_10,
+	ARM_GPIO_PIN_11,
+	ARM_GPIO_PIN_12,
+	ARM_GPIO_PIN_13,
+	ARM_GPIO_PIN_14,
+	ARM_GPIO_PIN_15
+} ARM_GPIO_Pin_t;
+
+// Enum for GPIO Direction
+typedef enum {
+    ARM_GPIO_DIRECTION_INPUT1 = 0,
+    ARM_GPIO_DIRECTION_OUTPUT1,
+} ARM_GPIO_DIRECTION1;
+
+// Enum for GPIO Output Mode
+typedef enum {
+    ARM_GPIO_OUTPUT_PUSH_PULL = 0,
+    ARM_GPIO_OUTPUT_OPEN_DRAIN,
+} ARM_GPIO_OUTPUT_MODE;
+
+// Enum for Pull Resistor Configuration
+typedef enum {
+    ARM_GPIO_PULL_NONE1 = 0,
+    ARM_GPIO_PULL_UP1,
+    ARM_GPIO_PULL_DOWN1,
+} ARM_GPIO_PULL_RESISTOR1;
+
+// Enum for GPIO Event Trigger Types
+typedef enum {
+    ARM_GPIO_EVENT_RISING_EDGE = 0,
+    ARM_GPIO_EVENT_FALLING_EDGE,
+    ARM_GPIO_EVENT_BOTH_EDGES,
+} ARM_GPIO_EVENT_TRIGGER;
+
+// Define the callback function type for GPIO event handling
+typedef void (*ARM_GPIO_SignalEvent_t)(void);
+
+// Function prototypes for GPIO configuration
+void GPIO_Setup(ARM_GPIO_Pin_t pin, ARM_GPIO_SignalEvent_t cb_event);
+void GPIO_SetDirection(ARM_PORT_ID port, ARM_GPIO_Pin_t pin, ARM_GPIO_DIRECTION direction);
+//void GPIO_SetOutputMode(ARM_GPIO_Pin_t pin, ARM_GPIO_OUTPUT_MODE mode);
+void GPIO_SetPullResistor(ARM_PORT_ID port, ARM_GPIO_Pin_t pin, ARM_GPIO_PULL_RESISTOR resistor);
+void GPIO_SetEventTrigger(ARM_GPIO_Pin_t pin, ARM_GPIO_EVENT_TRIGGER trigger);
+void GPIO_SetOutput(ARM_PORT_ID port, ARM_GPIO_Pin_t pin, uint32_t val);
+uint32_t GPIO_GetInput(ARM_PORT_ID port, ARM_GPIO_Pin_t pin);
+
+#endif // GPIO_H

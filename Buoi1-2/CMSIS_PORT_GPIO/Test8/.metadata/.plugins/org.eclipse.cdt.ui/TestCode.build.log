@@ -1,0 +1,21 @@
+11:49:19 **** Incremental Build of configuration Debug_FLASH for project TestCode ****
+make -j16 all 
+Building file: ../src/main.c
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+Finished building: ../src/main.c
+ 
+Building target: TestCode.elf
+Invoking: Standard S32DS C Linker
+arm-none-eabi-gcc -o "TestCode.elf" "@TestCode.args"   
+Finished building target: TestCode.elf
+ 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley TestCode.elf
+   text	   data	    bss	    dec	    hex	filename
+   6404	   2400	   3328	  12132	   2f64	TestCode.elf
+Finished building: TestCode.siz
+ 
+
+11:49:20 Build Finished. 0 errors, 0 warnings. (took 706ms)
+
