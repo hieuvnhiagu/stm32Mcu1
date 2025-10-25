@@ -1,0 +1,101 @@
+22:38:32 **** Build of configuration Debug_FLASH for project gpioInterrupt ****
+make -j16 all 
+Building file: ../src/main.c
+Building file: ../driver/PORT/PORT.c
+Building file: ../driver/PCC/PCC.c
+Invoking: Standard S32DS C Compiler
+Building file: ../driver/GPIO/GPIO.c
+Building file: ../Project_Settings/Startup_Code/startup.c
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+Building file: ../Project_Settings/Startup_Code/startup_S32K144.S
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@driver/PORT/PORT.args" -MMD -MP -MF"driver/PORT/PORT.d" -MT"driver/PORT/PORT.o" -o "driver/PORT/PORT.o" "../driver/PORT/PORT.c"
+Invoking: Standard S32DS C Compiler
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@driver/PCC/PCC.args" -MMD -MP -MF"driver/PCC/PCC.d" -MT"driver/PCC/PCC.o" -o "driver/PCC/PCC.o" "../driver/PCC/PCC.c"
+arm-none-eabi-gcc "@Project_Settings/Startup_Code/startup.args" -MMD -MP -MF"Project_Settings/Startup_Code/startup.d" -MT"Project_Settings/Startup_Code/startup.o" -o "Project_Settings/Startup_Code/startup.o" "../Project_Settings/Startup_Code/startup.c"
+Invoking: Standard S32DS Assembler
+arm-none-eabi-gcc "@driver/GPIO/GPIO.args" -MMD -MP -MF"driver/GPIO/GPIO.d" -MT"driver/GPIO/GPIO.o" -o "driver/GPIO/GPIO.o" "../driver/GPIO/GPIO.c"
+Building file: ../Project_Settings/Startup_Code/system_S32K144.c
+arm-none-eabi-gcc "@Project_Settings/Startup_Code/startup_S32K144.args" -o "Project_Settings/Startup_Code/startup_S32K144.o" "../Project_Settings/Startup_Code/startup_S32K144.S"
+Invoking: Standard S32DS C Compiler
+../src/main.c: In function 'S32_NVIC_EnableIRQ':
+../src/main.c:71:9: error: 'S32_NVIC' undeclared (first use in this function)
+   71 |         S32_NVIC->ISER[(uint32_t)((int32_t)IRQn) >> 5] = (uint32_t)(1 << ((uint32_t)((int32_t)IRQn) & (uint32_t)0x1F));
+      |         ^~~~~~~~
+../src/main.c:71:9: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [src/subdir.mk:20: src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+arm-none-eabi-gcc "@Project_Settings/Startup_Code/startup.args" -MMD -MP -MF"Project_Settings/Startup_Code/system_S32K144.d" -MT"Project_Settings/Startup_Code/system_S32K144.o" -o "Project_Settings/Startup_Code/system_S32K144.o" "../Project_Settings/Startup_Code/system_S32K144.c"
+Finished building: ../Project_Settings/Startup_Code/startup_S32K144.S
+Finished building: ../driver/PORT/PORT.c
+ 
+Finished building: ../driver/PCC/PCC.c
+ 
+Finished building: ../Project_Settings/Startup_Code/startup.c
+Finished building: ../driver/GPIO/GPIO.c
+ 
+ 
+ 
+Finished building: ../Project_Settings/Startup_Code/system_S32K144.c
+ 
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+22:42:32 **** Incremental Build of configuration Debug_FLASH for project gpioInterrupt ****
+make -j16 all 
+Building file: ../src/main.c
+Building file: ../driver/PCC/PCC.c
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@driver/PCC/PCC.args" -MMD -MP -MF"driver/PCC/PCC.d" -MT"driver/PCC/PCC.o" -o "driver/PCC/PCC.o" "../driver/PCC/PCC.c"
+../src/main.c: In function 'S32_NVIC_EnableIRQ':
+../src/main.c:71:9: error: 'S32_NVIC' undeclared (first use in this function)
+   71 |         S32_NVIC->ISER[(uint32_t)((int32_t)IRQn) >> 5] = (uint32_t)(1 << ((uint32_t)((int32_t)IRQn) & (uint32_t)0x1F));
+      |         ^~~~~~~~
+../src/main.c:71:9: note: each undeclared identifier is reported only once for each function it appears in
+../src/main.c: In function 'main':
+../src/main.c:79:5: warning: implicit declaration of function 'PCC_EnableClock_PORT'; did you mean 'PCC_EnableClock_PORTC'? [-Wimplicit-function-declaration]
+   79 |     PCC_EnableClock_PORT('C');;
+      |     ^~~~~~~~~~~~~~~~~~~~
+      |     PCC_EnableClock_PORTC
+make: *** [src/subdir.mk:20: src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+Finished building: ../driver/PCC/PCC.c
+ 
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+22:42:58 **** Incremental Build of configuration Debug_FLASH for project gpioInterrupt ****
+make -j16 all 
+Building file: ../src/main.c
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'S32_NVIC_EnableIRQ':
+../src/main.c:71:9: error: 'S32_NVIC' undeclared (first use in this function)
+   71 |         S32_NVIC->ISER[(uint32_t)((int32_t)IRQn) >> 5] = (uint32_t)(1 << ((uint32_t)((int32_t)IRQn) & (uint32_t)0x1F));
+      |         ^~~~~~~~
+../src/main.c:71:9: note: each undeclared identifier is reported only once for each function it appears in
+../src/main.c: In function 'main':
+../src/main.c:79:9: warning: implicit declaration of function 'PCC_EnableClock_PORT'; did you mean 'PCC_EnableClock_PORTC'? [-Wimplicit-function-declaration]
+   79 |         PCC_EnableClock_PORT('C');;
+      |         ^~~~~~~~~~~~~~~~~~~~
+      |         PCC_EnableClock_PORTC
+make: *** [src/subdir.mk:20: src/main.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+22:44:00 **** Incremental Build of configuration Debug_FLASH for project gpioInterrupt ****
+make -j16 all 
+Building file: ../src/main.c
+Building file: ../driver/PCC/PCC.c
+Invoking: Standard S32DS C Compiler
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+arm-none-eabi-gcc "@driver/PCC/PCC.args" -MMD -MP -MF"driver/PCC/PCC.d" -MT"driver/PCC/PCC.o" -o "driver/PCC/PCC.o" "../driver/PCC/PCC.c"
+../src/main.c: In function 'S32_NVIC_EnableIRQ':
+../src/main.c:71:9: error: 'S32_NVIC' undeclared (first use in this function)
+   71 |         S32_NVIC->ISER[(uint32_t)((int32_t)IRQn) >> 5] = (uint32_t)(1 << ((uint32_t)((int32_t)IRQn) & (uint32_t)0x1F));
+      |         ^~~~~~~~
+../src/main.c:71:9: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [src/subdir.mk:20: src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+Finished building: ../driver/PCC/PCC.c
+ 
+"make -j16 all" terminated with exit code 2. Build might be incomplete.

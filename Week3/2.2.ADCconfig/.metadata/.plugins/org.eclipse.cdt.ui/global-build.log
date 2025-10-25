@@ -1,0 +1,179 @@
+08:57:40 **** Build of configuration Debug_FLASH for project ADCconfig ****
+make -j16 all 
+Building file: ../Project_Settings/Startup_Code/startup.c
+Building file: ../src/main.c
+Building file: ../Project_Settings/Startup_Code/startup_S32K144.S
+Building file: ../Project_Settings/Startup_Code/system_S32K144.c
+Invoking: Standard S32DS C Compiler
+Invoking: Standard S32DS C Compiler
+Invoking: Standard S32DS Assembler
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+arm-none-eabi-gcc "@Project_Settings/Startup_Code/startup.args" -MMD -MP -MF"Project_Settings/Startup_Code/startup.d" -MT"Project_Settings/Startup_Code/startup.o" -o "Project_Settings/Startup_Code/startup.o" "../Project_Settings/Startup_Code/startup.c"
+arm-none-eabi-gcc "@Project_Settings/Startup_Code/startup.args" -MMD -MP -MF"Project_Settings/Startup_Code/system_S32K144.d" -MT"Project_Settings/Startup_Code/system_S32K144.o" -o "Project_Settings/Startup_Code/system_S32K144.o" "../Project_Settings/Startup_Code/system_S32K144.c"
+arm-none-eabi-gcc "@Project_Settings/Startup_Code/startup_S32K144.args" -o "Project_Settings/Startup_Code/startup_S32K144.o" "../Project_Settings/Startup_Code/startup_S32K144.S"
+../src/main.c:1:10: fatal error: ADC.h: No such file or directory
+    1 | #include "ADC.h"
+      |          ^~~~~~~
+compilation terminated.
+make: *** [src/subdir.mk:20: src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+Finished building: ../Project_Settings/Startup_Code/startup_S32K144.S
+ 
+Finished building: ../Project_Settings/Startup_Code/system_S32K144.c
+Finished building: ../Project_Settings/Startup_Code/startup.c
+ 
+ 
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+09:00:01 **** Clean-only build of configuration Debug_FLASH for project ADCconfig ****
+make -j16 clean 
+rm -rf ./*
+ 
+09:00:01 **** Incremental Build of configuration Debug_FLASH for project ADCconfig ****
+make -j16 all 
+Building file: ../src/main.c
+Building file: ../driver/PORT/PORT.c
+Building file: ../driver/PCC/PCC.c
+Building file: ../driver/GPIO/GPIO.c
+Building file: ../driver/ADC/ADC.c
+Building file: ../Project_Settings/Startup_Code/startup.c
+Invoking: Standard S32DS C Compiler
+Invoking: Standard S32DS C Compiler
+Invoking: Standard S32DS C Compiler
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+Building file: ../Project_Settings/Startup_Code/startup_S32K144.S
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@driver/PORT/PORT.args" -MMD -MP -MF"driver/PORT/PORT.d" -MT"driver/PORT/PORT.o" -o "driver/PORT/PORT.o" "../driver/PORT/PORT.c"
+arm-none-eabi-gcc "@driver/PCC/PCC.args" -MMD -MP -MF"driver/PCC/PCC.d" -MT"driver/PCC/PCC.o" -o "driver/PCC/PCC.o" "../driver/PCC/PCC.c"
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@Project_Settings/Startup_Code/startup.args" -MMD -MP -MF"Project_Settings/Startup_Code/startup.d" -MT"Project_Settings/Startup_Code/startup.o" -o "Project_Settings/Startup_Code/startup.o" "../Project_Settings/Startup_Code/startup.c"
+arm-none-eabi-gcc "@driver/GPIO/GPIO.args" -MMD -MP -MF"driver/GPIO/GPIO.d" -MT"driver/GPIO/GPIO.o" -o "driver/GPIO/GPIO.o" "../driver/GPIO/GPIO.c"
+Invoking: Standard S32DS Assembler
+arm-none-eabi-gcc "@driver/ADC/ADC.args" -MMD -MP -MF"driver/ADC/ADC.d" -MT"driver/ADC/ADC.o" -o "driver/ADC/ADC.o" "../driver/ADC/ADC.c"
+arm-none-eabi-gcc "@Project_Settings/Startup_Code/startup_S32K144.args" -o "Project_Settings/Startup_Code/startup_S32K144.o" "../Project_Settings/Startup_Code/startup_S32K144.S"
+Building file: ../Project_Settings/Startup_Code/system_S32K144.c
+Invoking: Standard S32DS C Compiler
+../src/main.c: In function 'LED_Control':
+../src/main.c:10:9: warning: implicit declaration of function 'GPIO_SetPin' [-Wimplicit-function-declaration]
+   10 |         GPIO_SetPin(IP_PTD,15);                       //RED ON
+      |         ^~~~~~~~~~~
+../src/main.c:11:9: warning: implicit declaration of function 'GPIO_ClearPin' [-Wimplicit-function-declaration]
+   11 |         GPIO_ClearPin(IP_PTD,16);                     //GREEN OFF
+      |         ^~~~~~~~~~~~~
+arm-none-eabi-gcc "@Project_Settings/Startup_Code/startup.args" -MMD -MP -MF"Project_Settings/Startup_Code/system_S32K144.d" -MT"Project_Settings/Startup_Code/system_S32K144.o" -o "Project_Settings/Startup_Code/system_S32K144.o" "../Project_Settings/Startup_Code/system_S32K144.c"
+../src/main.c: In function 'main':
+../src/main.c:37:9: warning: implicit declaration of function 'PCC_EnableClock_PORT' [-Wimplicit-function-declaration]
+   37 |         PCC_EnableClock_PORT(PCC_PORTC_INDEX);
+      |         ^~~~~~~~~~~~~~~~~~~~
+../src/main.c:41:9: warning: implicit declaration of function 'PORT_PinConfig' [-Wimplicit-function-declaration]
+   41 |         PORT_PinConfig(IP_PORTC,14, PORT_MUX_ADC);
+      |         ^~~~~~~~~~~~~~
+../src/main.c:41:37: error: 'PORT_MUX_ADC' undeclared (first use in this function)
+   41 |         PORT_PinConfig(IP_PORTC,14, PORT_MUX_ADC);
+      |                                     ^~~~~~~~~~~~
+../src/main.c:41:37: note: each undeclared identifier is reported only once for each function it appears in
+../src/main.c:43:37: error: 'PORT_MUX_GPIO' undeclared (first use in this function)
+   43 |         PORT_PinConfig(IP_PORTC,15, PORT_MUX_GPIO);
+      |                                     ^~~~~~~~~~~~~
+../src/main.c:49:33: error: 'ADC0_BASE' undeclared (first use in this function); did you mean 'IP_ADC0_BASE'?
+   49 |     ADC_Type *adc = (ADC_Type *)ADC0_BASE;  // Giả sử bạn đang làm việc với ADC0
+      |                                 ^~~~~~~~~
+      |                                 IP_ADC0_BASE
+Finished building: ../Project_Settings/Startup_Code/startup_S32K144.S
+make: *** [src/subdir.mk:20: src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+ 
+Finished building: ../driver/PCC/PCC.c
+Finished building: ../driver/GPIO/GPIO.c
+Finished building: ../driver/PORT/PORT.c
+Finished building: ../driver/ADC/ADC.c
+Finished building: ../Project_Settings/Startup_Code/startup.c
+ 
+ 
+ 
+ 
+ 
+Finished building: ../Project_Settings/Startup_Code/system_S32K144.c
+ 
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+09:04:06 **** Incremental Build of configuration Debug_FLASH for project ADCconfig ****
+make -j16 all 
+Building file: ../src/main.c
+Building file: ../driver/GPIO/GPIO.c
+Invoking: Standard S32DS C Compiler
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+arm-none-eabi-gcc "@driver/GPIO/GPIO.args" -MMD -MP -MF"driver/GPIO/GPIO.d" -MT"driver/GPIO/GPIO.o" -o "driver/GPIO/GPIO.o" "../driver/GPIO/GPIO.c"
+../src/main.c: In function 'main':
+../src/main.c:67:28: error: 'adc' undeclared (first use in this function)
+   67 |         adc_val = ADC_Read(adc, 14);
+      |                            ^~~
+../src/main.c:67:28: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [src/subdir.mk:20: src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+Finished building: ../driver/GPIO/GPIO.c
+ 
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+09:04:44 **** Incremental Build of configuration Debug_FLASH for project ADCconfig ****
+make -j16 all 
+Building file: ../src/main.c
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+Finished building: ../src/main.c
+ 
+Building target: ADCconfig.elf
+Invoking: Standard S32DS C Linker
+arm-none-eabi-gcc -o "ADCconfig.elf" "@ADCconfig.args"   
+f:/download/s32ds/s32ds/build_tools/gcc_v11.4/gcc-11.4-arm32-eabi/bin/../lib/gcc/arm-none-eabi/11.4.0/../../../../arm-none-eabi/bin/real-ld.exe: ./src/main.o: in function `main':
+F:\cac_mon_hoc\s32k144\Documentations\codeTest\1.1\Test10\2.2.ADCconfig\ADCconfig\Debug_FLASH/../src/main.c:40: undefined reference to `PCC_EnableClock_PORT'
+f:/download/s32ds/s32ds/build_tools/gcc_v11.4/gcc-11.4-arm32-eabi/bin/../lib/gcc/arm-none-eabi/11.4.0/../../../../arm-none-eabi/bin/real-ld.exe: F:\cac_mon_hoc\s32k144\Documentations\codeTest\1.1\Test10\2.2.ADCconfig\ADCconfig\Debug_FLASH/../src/main.c:41: undefined reference to `PCC_EnableClock_PORT'
+f:/download/s32ds/s32ds/build_tools/gcc_v11.4/gcc-11.4-arm32-eabi/bin/../lib/gcc/arm-none-eabi/11.4.0/../../../../arm-none-eabi/bin/real-ld.exe: F:\cac_mon_hoc\s32k144\Documentations\codeTest\1.1\Test10\2.2.ADCconfig\ADCconfig\Debug_FLASH/../src/main.c:42: undefined reference to `PCC_EnableClock_PORT'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:40: ADCconfig.elf] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+09:05:23 **** Incremental Build of configuration Debug_FLASH for project ADCconfig ****
+make -j16 all 
+Building file: ../src/main.c
+Building file: ../driver/PCC/PCC.c
+Invoking: Standard S32DS C Compiler
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+arm-none-eabi-gcc "@driver/PCC/PCC.args" -MMD -MP -MF"driver/PCC/PCC.d" -MT"driver/PCC/PCC.o" -o "driver/PCC/PCC.o" "../driver/PCC/PCC.c"
+Finished building: ../src/main.c
+Finished building: ../driver/PCC/PCC.c
+ 
+ 
+Building target: ADCconfig.elf
+Invoking: Standard S32DS C Linker
+arm-none-eabi-gcc -o "ADCconfig.elf" "@ADCconfig.args"   
+f:/download/s32ds/s32ds/build_tools/gcc_v11.4/gcc-11.4-arm32-eabi/bin/../lib/gcc/arm-none-eabi/11.4.0/../../../../arm-none-eabi/bin/real-ld.exe: ./src/main.o: in function `main':
+F:\cac_mon_hoc\s32k144\Documentations\codeTest\1.1\Test10\2.2.ADCconfig\ADCconfig\Debug_FLASH/../src/main.c:40: undefined reference to `PCC_EnableClock_PORT'
+f:/download/s32ds/s32ds/build_tools/gcc_v11.4/gcc-11.4-arm32-eabi/bin/../lib/gcc/arm-none-eabi/11.4.0/../../../../arm-none-eabi/bin/real-ld.exe: F:\cac_mon_hoc\s32k144\Documentations\codeTest\1.1\Test10\2.2.ADCconfig\ADCconfig\Debug_FLASH/../src/main.c:41: undefined reference to `PCC_EnableClock_PORT'
+f:/download/s32ds/s32ds/build_tools/gcc_v11.4/gcc-11.4-arm32-eabi/bin/../lib/gcc/arm-none-eabi/11.4.0/../../../../arm-none-eabi/bin/real-ld.exe: F:\cac_mon_hoc\s32k144\Documentations\codeTest\1.1\Test10\2.2.ADCconfig\ADCconfig\Debug_FLASH/../src/main.c:42: undefined reference to `PCC_EnableClock_PORT'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:40: ADCconfig.elf] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+09:06:10 **** Incremental Build of configuration Debug_FLASH for project ADCconfig ****
+make -j16 all 
+Building file: ../src/main.c
+Building file: ../driver/PCC/PCC.c
+Invoking: Standard S32DS C Compiler
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+arm-none-eabi-gcc "@driver/PCC/PCC.args" -MMD -MP -MF"driver/PCC/PCC.d" -MT"driver/PCC/PCC.o" -o "driver/PCC/PCC.o" "../driver/PCC/PCC.c"
+Finished building: ../src/main.c
+Finished building: ../driver/PCC/PCC.c
+ 
+ 
+Building target: ADCconfig.elf
+Invoking: Standard S32DS C Linker
+arm-none-eabi-gcc -o "ADCconfig.elf" "@ADCconfig.args"   
+Finished building target: ADCconfig.elf
+ 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley ADCconfig.elf
+   text	   data	    bss	    dec	    hex	filename
+   8312	   2400	   3328	  14040	   36d8	ADCconfig.elf
+Finished building: ADCconfig.siz
+ 

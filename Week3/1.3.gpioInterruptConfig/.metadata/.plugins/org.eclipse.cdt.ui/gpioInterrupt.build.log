@@ -1,0 +1,21 @@
+22:44:00 **** Incremental Build of configuration Debug_FLASH for project gpioInterrupt ****
+make -j16 all 
+Building file: ../src/main.c
+Building file: ../driver/PCC/PCC.c
+Invoking: Standard S32DS C Compiler
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+arm-none-eabi-gcc "@driver/PCC/PCC.args" -MMD -MP -MF"driver/PCC/PCC.d" -MT"driver/PCC/PCC.o" -o "driver/PCC/PCC.o" "../driver/PCC/PCC.c"
+../src/main.c: In function 'S32_NVIC_EnableIRQ':
+../src/main.c:71:9: error: 'S32_NVIC' undeclared (first use in this function)
+   71 |         S32_NVIC->ISER[(uint32_t)((int32_t)IRQn) >> 5] = (uint32_t)(1 << ((uint32_t)((int32_t)IRQn) & (uint32_t)0x1F));
+      |         ^~~~~~~~
+../src/main.c:71:9: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [src/subdir.mk:20: src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+Finished building: ../driver/PCC/PCC.c
+ 
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+
+22:44:01 Build Failed. 3 errors, 0 warnings. (took 346ms)
+

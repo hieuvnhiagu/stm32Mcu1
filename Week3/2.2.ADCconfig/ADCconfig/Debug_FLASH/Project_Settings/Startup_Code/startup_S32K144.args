@@ -1,0 +1,11 @@
+-c
+-I"F:/cac_mon_hoc/s32k144/Documentations/codeTest/1.1/Test10/2.2.ADCconfig/ADCconfig/include"
+-I"F:/cac_mon_hoc/s32k144/Documentations/codeTest/1.1/Test10/2.2.ADCconfig/ADCconfig/driver/ADC"
+-I"F:/cac_mon_hoc/s32k144/Documentations/codeTest/1.1/Test10/2.2.ADCconfig/ADCconfig/driver/GPIO"
+-I"F:/cac_mon_hoc/s32k144/Documentations/codeTest/1.1/Test10/2.2.ADCconfig/ADCconfig/driver/PCC"
+-I"F:/cac_mon_hoc/s32k144/Documentations/codeTest/1.1/Test10/2.2.ADCconfig/ADCconfig/driver/PORT"
+-x assembler-with-cpp
+-DSTART_FROM_FLASH
+-g3
+-mcpu=cortex-m4
+-specs=rdimon.specs

@@ -1,0 +1,10 @@
+-c
+-I"F:/cac_mon_hoc/s32k144/Documentations/codeTest/1.1/Test10/1.3.gpioInterruptConfig/gpioInterrupt/include"
+-I"F:/cac_mon_hoc/s32k144/Documentations/codeTest/1.1/Test10/1.3.gpioInterruptConfig/gpioInterrupt/driver/GPIO"
+-I"F:/cac_mon_hoc/s32k144/Documentations/codeTest/1.1/Test10/1.3.gpioInterruptConfig/gpioInterrupt/driver/PCC"
+-I"F:/cac_mon_hoc/s32k144/Documentations/codeTest/1.1/Test10/1.3.gpioInterruptConfig/gpioInterrupt/driver/PORT"
+-x assembler-with-cpp
+-DSTART_FROM_FLASH
+-g3
+-mcpu=cortex-m4
+-specs=rdimon.specs

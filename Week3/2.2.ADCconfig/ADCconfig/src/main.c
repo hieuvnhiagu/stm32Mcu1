@@ -1,0 +1,74 @@
+#include "ADC.h"
+#include "GPIO.h"
+#include "PCC.h"
+#include "PORT.h"
+
+void LED_Control(uint16_t adc_value)
+{
+    float voltage = (adc_value * 5000.0) / 4095.0;  // Quy đổi sang mV
+
+    // Điều khiển LED dựa trên điện áp (mV)
+    if (voltage >= 3750)
+    {
+    	GPIO_SetPin(IP_PTD,15);                       //RED ON
+    	GPIO_ClearPin(IP_PTD,16);                     //GREEN OFF
+    	GPIO_ClearPin(IP_PTD,0);    	              //BLUE OFF
+    }
+    else if (voltage >= 2500)
+    {
+    	GPIO_SetPin(IP_PTD,16);                       //GREEN ON
+    	GPIO_ClearPin(IP_PTD,15);                     //RED OFF
+    	GPIO_ClearPin(IP_PTD,0);                      //BLUE OFF
+    }
+    else if (voltage >= 1250)
+    {
+    	GPIO_SetPin(IP_PTD,0);                        //BLUE ON
+    	GPIO_ClearPin(IP_PTD,16);                     //GREEN OFF
+    	GPIO_ClearPin(IP_PTD,15);                     //RED OFF
+    }
+    else
+    {
+    	GPIO_ClearPin(IP_PTD,0);                      //BLUE OFF
+    	GPIO_ClearPin(IP_PTD,16);                     //GREEN OFF
+    	GPIO_ClearPin(IP_PTD,15);                     //RED OFF
+    }
+}
+
+int main(void)
+{
+    // Bật clock và cấu hình các cổng
+	PCC_EnableClock(PCC_PORTC_INDEX);
+	PCC_EnableClock(PCC_PORTD_INDEX);
+	PCC_EnableClock(PCC_ADC0_INDEX);
+	// Cấu hình chân ADC (PTC14 → ADC0_SE14)
+	PORT_PinConfig(IP_PORTC,14, PORT_MUX_ADC);
+	// Cấu hình LED: PTD15, PTD16, PTD0 là output (RED, GREEN,BLUE)
+	PORT_PinConfig(IP_PORTC,15, PORT_MUX_GPIO);
+	PORT_PinConfig(IP_PORTC,16, PORT_MUX_GPIO);
+	PORT_PinConfig(IP_PORTC,0, PORT_MUX_GPIO);
+
+    uint16_t adc_val;
+    ADC_Config adc_config;
+//    ADC_Type *adc = (ADC_Type *)IP_ADC0_BASE;  // Giả sử bạn đang làm việc với ADC0
+
+    // Cấu hình các tham số cho ADC
+    adc_config.smplts = 127;  // Thời gian lấy mẫu = 128 chu kỳ ADCK (SMPLTS = 127)
+    adc_config.refsel = 1;    // Sử dụng nguồn tham chiếu ngoài (VrefH)
+    adc_config.mode = 1;      // 12-bit ADC resolution
+    adc_config.adiclk = 0;    // Sử dụng bus clock
+    adc_config.adiv = 2;      // Chia clock ADC
+
+    // Cấu hình ADC với các tham số cấu hình
+    ADC_Init(IP_ADC0, &adc_config);
+
+    while (1)
+    {
+        // Đọc giá trị ADC từ PTC14 (ADC0_SE14)
+        adc_val = ADC_Read(IP_ADC0, 14);
+
+        // Điều khiển LED dựa trên giá trị ADC đọc được
+        LED_Control(adc_val);
+    }
+
+    return 0;
+}

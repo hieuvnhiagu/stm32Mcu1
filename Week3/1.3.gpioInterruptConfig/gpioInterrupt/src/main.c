@@ -1,0 +1,103 @@
+#include "S32K144.h"
+#include "PCC.h"
+#include "PORT.h"
+#include "GPIO.h"
+
+#define RED_LED_PIN     15U
+#define GREEN_LED_PIN   16U
+#define BTN1_PIN        12U
+#define BTN2_PIN        13U
+
+//int main(void)
+//{
+//    /* 1. Bật clock cho PORTC */
+//    PCC_EnableClock_PORTC();
+//
+//    /* 2. Cấu hình chân PORTC15, PORTC16 là GPIO output (LED) */
+//    PORTC_PinConfig(RED_LED_PIN, PORT_MUX_GPIO);
+//    PORTC_PinConfig(GREEN_LED_PIN, PORT_MUX_GPIO);
+//
+//    /* 3. Cấu hình chân PORTC12, PORTC13 là input (Button) */
+//    PORTC_PinConfig(BTN1_PIN, PORT_MUX_GPIO);
+//    PORTC_PinConfig(BTN2_PIN, PORT_MUX_GPIO);
+//
+//    /* 4. Thiết lập hướng chân */
+//    GPIO_SetPinOutput(IP_PTC, RED_LED_PIN);
+//    GPIO_SetPinOutput(IP_PTC, GREEN_LED_PIN);
+//    GPIO_SetPinInput(IP_PTC, BTN1_PIN);
+//    GPIO_SetPinInput(IP_PTC, BTN2_PIN);
+//
+//
+//    while (1)
+//    {
+//        if (GPIO_ReadPin(IP_PTC, BTN1_PIN) == 0) // Nút nhấn thường active-low
+//        {
+//            GPIO_TogglePin(IP_PTC, RED_LED_PIN);
+//            for (volatile int i = 0; i < 500000; i++); // delay thô
+//        }
+//
+//        if (GPIO_ReadPin(IP_PTC, BTN2_PIN) == 0)
+//        {
+//            GPIO_TogglePin(IP_PTC, GREEN_LED_PIN);
+//            for (volatile int i = 0; i < 500000; i++);
+//        }
+//    }
+//}
+
+
+#define FALLING_EDGE 0x9  // 0b1001 (falling edge)
+void PORTC_IRQHandler(void)
+{
+    // Kiểm tra xem ngắt đến từ chân BTN1 hay BTN2
+    if (GPIO_ReadPin(IP_PTC, BTN1_PIN) == 0) // Nếu BTN1 bị nhấn (active-low)
+    {
+        GPIO_TogglePin(IP_PTC, RED_LED_PIN); // Chuyển trạng thái LED đỏ
+    }
+
+    if (GPIO_ReadPin(IP_PTC, BTN2_PIN) == 0) // Nếu BTN2 bị nhấn (active-low)
+    {
+        GPIO_TogglePin(IP_PTC, GREEN_LED_PIN); // Chuyển trạng thái LED xanh
+    }
+
+    // Xóa ngắt để không bị lặp lại
+    IP_PORTC->PCR[BTN1_PIN] |= PORT_PCR_ISF_MASK; // Xóa ngắt của BTN1
+    IP_PORTC->PCR[BTN2_PIN] |= PORT_PCR_ISF_MASK; // Xóa ngắt của BTN2
+}
+
+void S32_NVIC_EnableIRQ(IRQn_Type IRQn, int Priority)
+{
+     //Left shift 5 is because of the lover 32, because iSer [0-7] corresponds to 0-256 bit interrupt
+	/* enable interrupt */
+	S32_NVIC->ISER[(uint32_t)((int32_t)IRQn) >> 5] = (uint32_t)(1 << ((uint32_t)((int32_t)IRQn) & (uint32_t)0x1F));
+	S32_NVIC->IP[IRQn] = Priority;
+}
+
+int main(void)
+{
+    /* 1. Bật clock cho PORTC */
+    // Khởi tạo clock cho PORTC
+	PCC_EnableClock_PORT('C');;
+
+    /* 2. Cấu hình chân PORTC15, PORTC16 là GPIO output (LED) */
+    PORT_PinConfig(IP_PORTC,RED_LED_PIN, PORT_MUX_GPIO); // Không ngắt cho LED
+    PORT_PinConfig(IP_PORTC,GREEN_LED_PIN, PORT_MUX_GPIO); // Không ngắt cho LED
+
+    /* 3. Cấu hình chân PORTC12, PORTC13 là input (Button) và kích hoạt ngắt */
+    PORT_Interrupt(IP_PORTC,BTN1_PIN, PORT_MUX_GPIO, FALLING_EDGE); // Ngắt khi nút BTN1 được nhấn (falling edge)
+    PORT_Interrupt(IP_PORTC,BTN2_PIN, PORT_MUX_GPIO, FALLING_EDGE); // Ngắt khi nút BTN2 được nhấn (falling edge)
+
+    /* 4. Thiết lập hướng chân */
+    GPIO_SetPinOutput(IP_PTC, RED_LED_PIN);
+    GPIO_SetPinOutput(IP_PTC, GREEN_LED_PIN);
+    GPIO_SetPinInput(IP_PTC, BTN1_PIN);
+    GPIO_SetPinInput(IP_PTC, BTN2_PIN);
+
+    /* 5. Kích hoạt ngắt trong NVIC và cấu hình ưu tiên */
+    int irqPriority = 3;  // Mức ưu tiên ngắt (0 là mức cao nhất)
+    S32_NVIC_EnableIRQ(PORTC_IRQn, irqPriority);  // Kích hoạt ngắt PORTC với mức ưu tiên
+
+    while (1)
+    {
+        // Trong vòng lặp chính, bạn không cần phải kiểm tra nút nhấn nữa, ngắt sẽ xử lý
+    }
+}

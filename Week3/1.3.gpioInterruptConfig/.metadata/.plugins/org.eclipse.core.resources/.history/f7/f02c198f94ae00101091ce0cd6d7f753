@@ -1,0 +1,7 @@
+#include "S32K144.h"
+#include "PCC.h"
+
+void PCC_EnableClock_PORTC(void)
+{
+    IP_PCC->PCCn[PCC_PORTC_INDEX] |= PCC_PCCn_CGC_MASK;  // Bật clock cho PORTC
+}

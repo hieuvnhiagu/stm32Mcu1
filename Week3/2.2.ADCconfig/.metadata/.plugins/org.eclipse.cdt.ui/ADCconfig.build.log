@@ -1,0 +1,26 @@
+09:06:10 **** Incremental Build of configuration Debug_FLASH for project ADCconfig ****
+make -j16 all 
+Building file: ../src/main.c
+Building file: ../driver/PCC/PCC.c
+Invoking: Standard S32DS C Compiler
+Invoking: Standard S32DS C Compiler
+arm-none-eabi-gcc "@src/main.args" -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+arm-none-eabi-gcc "@driver/PCC/PCC.args" -MMD -MP -MF"driver/PCC/PCC.d" -MT"driver/PCC/PCC.o" -o "driver/PCC/PCC.o" "../driver/PCC/PCC.c"
+Finished building: ../src/main.c
+Finished building: ../driver/PCC/PCC.c
+ 
+ 
+Building target: ADCconfig.elf
+Invoking: Standard S32DS C Linker
+arm-none-eabi-gcc -o "ADCconfig.elf" "@ADCconfig.args"   
+Finished building target: ADCconfig.elf
+ 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley ADCconfig.elf
+   text	   data	    bss	    dec	    hex	filename
+   8312	   2400	   3328	  14040	   36d8	ADCconfig.elf
+Finished building: ADCconfig.siz
+ 
+
+09:06:11 Build Finished. 0 errors, 0 warnings. (took 818ms)
+

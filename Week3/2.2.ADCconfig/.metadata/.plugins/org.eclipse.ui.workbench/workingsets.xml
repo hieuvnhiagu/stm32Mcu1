@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workingSetManager>
+<workingSet editPageId="org.eclipse.jdt.internal.ui.DynamicSourcesWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1761062502215_0" label="Java Main Sources" name="Java Main Sources"/>
+<workingSet editPageId="org.eclipse.jdt.internal.ui.DynamicSourcesWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1761062502231_1" label="Java Test Sources" name="Java Test Sources"/>
+<workingSet factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1761062534839_3" label="ADCconfig" name="ADCconfig">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/ADCconfig" type="4"/>
+</workingSet>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1761062502867_2" label="Window Working Set" name="Aggregate for window 1761062502867"/>
+</workingSetManager>
