@@ -2,7 +2,7 @@
 #include "GPIO.h"
 #include "PCC.h"
 #include "PORT.h"
-
+/*test git */
 void LED_Control(uint16_t adc_value)
 {
     float voltage = (adc_value * 5000.0) / 4095.0;  // Quy đổi sang mV
